@@ -7,9 +7,21 @@ pipeline {
     }
 
     stages {
-        stage('Check Workspace') {
+        stage("Build") {
             steps {
-                bat 'dir /s'
+                bat 'echo Build Phase is running'
+            }
+        }
+
+        stage("Test") {
+            steps{
+                bat 'echo Test Phase is running'
+            }
+        }
+
+        stage("Deploy") {
+            steps{
+                bat 'echo Deploy Phase is running'
             }
         }
     }
