@@ -21,7 +21,7 @@ pipeline {
 
         stage("Deploy") {
             steps{
-                bat 'java -jar target\\demo-0.0.1-SNAPSHOT.jar'
+                bat 'start "" /b java -jar target\\demo-0.0.1-SNAPSHOT.jar > app.log 2>&1'
             }
         }
     }
