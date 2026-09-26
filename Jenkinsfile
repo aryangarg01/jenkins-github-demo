@@ -9,7 +9,7 @@ pipeline {
     stages {
         stage("Build") {
             steps {
-                bat 'echo Build Phase is running'
+                bat 'mvn clean install -DskipTests'
             }
         }
 
