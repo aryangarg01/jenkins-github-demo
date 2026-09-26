@@ -15,7 +15,7 @@ pipeline {
 
         stage("Test") {
             steps{
-                bat 'echo Test Phase is running'
+                bat 'mvn test'
             }
         }
 
