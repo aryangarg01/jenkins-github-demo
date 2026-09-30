@@ -8,8 +8,8 @@ pipeline {
     
     environment{
 		DOCKERHUB_CREDENTIALS = credentials("dockerhub-credentials")
-		TAG_ID = "${GIT.COMMIT.take(7)}"
-		IMAGE_NAME = "%DOCKERHUB_CREDENTIALS_USR%/demo"
+		TAG_ID = "${GIT_COMMIT.take(7)}"
+		IMAGE_NAME = "aryan284/demo"
 	}
     
 
@@ -50,7 +50,7 @@ pipeline {
             steps{
                 bat 'docker stop demo-container || exit 0'
                 bat 'docker rm demo-container || exit 0'
-                bat 'docker run -d --name demo-container -p 8081:8081 demo:1.0'
+                bat 'docker run -d --name demo-container -p 8081:8081 demo:%TAG_ID%'
             }
         }
     }
