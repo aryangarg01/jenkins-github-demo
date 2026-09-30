@@ -50,7 +50,8 @@ pipeline {
             steps{
                 bat 'docker stop demo-container || exit 0'
                 bat 'docker rm demo-container || exit 0'
-                bat 'docker run -d --name demo-container -p 8081:8081 demo:%TAG_ID%'
+                bat 'docker pull aryan284/demo:%TAG_ID%'
+                bat 'docker run -d --name demo-container -p 8081:8081 aryan284/demo:%TAG_ID%'
             }
         }
     }
