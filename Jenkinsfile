@@ -53,6 +53,8 @@ pipeline {
                 bat 'docker stop demo-container || exit 0'
                 bat 'docker rm demo-container || exit 0'
                 bat 'docker pull aryan284/demo:%TAG_ID%'
+                bat 'timeout /t 10'
+                bat 'curl --fail http://localhost:8081/actuator/health'
                 bat 'docker run -d --name demo-container -p 8081:8081 aryan284/demo:%TAG_ID%'
                 bat 'docker ps'
             }
