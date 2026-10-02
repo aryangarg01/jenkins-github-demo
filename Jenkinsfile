@@ -30,7 +30,7 @@ pipeline {
 			steps{
 				bat 'docker build -t demo:%TAG_ID% .'
 				bat 'docker tag demo:%TAG_ID% %IMAGE_NAME%:%TAG_ID%'
-				bat 'docker tag demo:latest %IMAGE_NAME%:latest'
+				bat 'docker tag demo:%TAG_ID% %IMAGE_NAME%:latest'
 			}
 		}
 		
