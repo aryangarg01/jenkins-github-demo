@@ -7,7 +7,7 @@ pipeline {
     }
     
     environment{
-		DOCKERHUB_CREDENTIALS = credentials("dockerhub-credentials")
+		// DOCKERHUB_CREDENTIALS = credentials("dockerhub-credentials")
 		TAG_ID = "${GIT_COMMIT.take(7)}"
 		IMAGE_NAME = "aryan284/demo"
 	}
@@ -30,6 +30,7 @@ pipeline {
 			steps{
 				bat 'docker build -t demo:%TAG_ID% .'
 				bat 'docker tag demo:%TAG_ID% %IMAGE_NAME%:%TAG_ID%'
+				bat 'docker tag demo:latest %IMAGE_NAME%:latest'
 			}
 		}
 		
@@ -43,6 +44,7 @@ pipeline {
 					bat 'docker login -u "%DOCKER_USERNAME%" -p "%DOCKER_PASSWORD%"'
 				}
 				bat 'docker push %IMAGE_NAME%:%TAG_ID%'
+				bat 'docker push %IMAGE_NAME%:latest'
 			}
 		}
 
@@ -52,6 +54,7 @@ pipeline {
                 bat 'docker rm demo-container || exit 0'
                 bat 'docker pull aryan284/demo:%TAG_ID%'
                 bat 'docker run -d --name demo-container -p 8081:8081 aryan284/demo:%TAG_ID%'
+                bat 'docker ps'
             }
         }
     }
