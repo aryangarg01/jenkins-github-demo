@@ -65,7 +65,7 @@ pipeline {
 						echo Waiting for application to become ready... Attempt %%i of 10
 						ping 127.0.0.1 -n 3 > nul
 					)
-	            	if "%READY%"=="0"(
+	            	if "%READY%"=="0" (
 						docker stop demo-container
 					)
 					exit /b 1
