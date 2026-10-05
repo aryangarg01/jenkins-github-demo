@@ -13,7 +13,7 @@ public class DemoController {
 	
 	@GetMapping("/demo")
 	public String getDemoReuest() {
-		return "Hello From Demo Get Request";
+		return "Hello From Demo Get Request calling from Docker through pipeline";
 	}
 
 }

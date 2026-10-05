@@ -54,8 +54,17 @@ pipeline {
                 bat 'docker rm demo-container || exit 0'
                 bat 'docker pull aryan284/demo:%TAG_ID%'
                 bat 'docker run -d --name demo-container -p 8081:8081 aryan284/demo:%TAG_ID%'
-                bat 'ping 127.0.0.1 -n 11 > nul'
-                bat 'curl --fail http://localhost:8081/actuator/health'
+                bat '''
+	            	for /L %%i in (1,1,10) do (
+						bat 'curl --fail http://localhost:8081/actuator/health/readiness'
+						if not errorlevel 1 exit /b 0
+						echo Waiting for application to become ready... Attempt %%i of 10
+						ping 127.0.0.1 -n 3 > nul
+					)
+	            	exit /b 1
+                '''
+                
+                
                 bat 'docker ps'
             }
         }
