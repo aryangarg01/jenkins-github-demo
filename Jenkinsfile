@@ -57,7 +57,7 @@ pipeline {
                 bat '''
                 	set READY=0
 	            	for /L %%i in (1,1,10) do (
-						curl --fail http://localhost:8081/actuator/health/readiness
+						bat curl --fail http://localhost:8081/actuator/health/readiness
 						if not errorlevel 1 (
 							set READY=1
 							exit /b 0
